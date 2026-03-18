@@ -1,0 +1,33 @@
+{
+  "name": "ai-council",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18",
+    "openai": "^4.52.7",
+    "@anthropic-ai/sdk": "^0.27.3",
+    "@google/generative-ai": "^0.17.1",
+    "framer-motion": "^11.3.19",
+    "lucide-react": "^0.414.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
+  }
+}
