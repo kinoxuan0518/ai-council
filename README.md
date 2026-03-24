@@ -6,7 +6,7 @@ Claude Code Skills for recruitment intelligence and candidate research.
 
 ### candidate-intelligence
 
-候选人竞调Agent — 基于公开信息的候选人深度调研与验证工具。
+候选人竞调 Skill — 基于公开信息的候选人深度调研与验证工具。
 
 结合情报式信息获取（穷举公开信源、交叉验证、标注置信度）与决策支持式分析（面评×简历×外部信息三角验证、行业框架定位、可执行验证方案），输出一份对招聘决策直接有用的报告。
 
