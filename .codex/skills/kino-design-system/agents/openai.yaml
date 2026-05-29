@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kino Design System"
+  short_description: "Soft editorial UI style guide"
+  default_prompt: "Use $kino-design-system to design a page, deck, or visual asset in Kino's preferred soft editorial UI style."
