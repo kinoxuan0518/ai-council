@@ -2,10 +2,11 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "AI Council (Next.js dev)",
+      "name": "portfolio",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "port": 5173,
+      "cwd": "/Users/blacklake/my-portfolio"
     }
   ]
 }

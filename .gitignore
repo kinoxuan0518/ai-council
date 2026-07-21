@@ -1,0 +1,157 @@
+# ============================================================
+# .gitignore for /Users/blacklake
+# 这个 git 仓库只管理 AI Council 前端项目 + .claude 技能配置
+# 其余 home 目录下的缓存、配置、应用数据全部忽略
+# ============================================================
+
+# ── 操作系统 ──────────────────────────────────────────────
+.DS_Store
+.CFUserTextEncoding
+.Trash/
+
+# ── Shell / 系统配置文件 ──────────────────────────────────
+.zshrc
+.zshrc.bak.*
+.zcompdump
+.zsh_history
+.zsh_sessions
+.viminfo
+.profile
+.gitconfig
+.npmrc
+
+# ── 标准 home 目录（不应进 git）──────────────────────────
+Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
+Public/
+go/
+bin/
+
+# ── SSH 密钥（绝不进 git）───────────────────────────────
+.ssh/
+
+# ── 第三方应用与缓存 ────────────────────────────────────
+Sunlogin/
+WorkBuddy/
+.playwright-feishu-profile/
+.playwright-mcp/
+bosszhibin_cache/
+bosszhibin_chrome_extension/
+qoderwork-chrome-extension/
+multi_platform_cache/
+hf-talent-pipeline/
+talent-space/
+
+# ── AI 工具运行时目录 ────────────────────────────────────
+.zcode/
+.codex/
+.codex-chrome-boss-host/
+.codex-chrome-cdp/
+.tutti/
+.cursor/
+.qoder/
+.qoderwork/
+.officecli/
+.dreamina_cli/
+.minimax-agent-cn/
+.kimi/
+.kimi-webbridge/
+.kimi_browser/
+.maimai-browser-profile/
+.agent-browser/
+.agents/
+.baoyu-skills/
+.bosszhibin-mcp/
+.bosszhibin_cache/
+.bosszhibin_chrome_extension/
+.bytertc/
+.cc-switch/
+.cola/
+.coli/
+.workbuddy/
+.hireclaw/
+.rbt/
+.EventSDK/
+.TrojanX/
+
+# ── 缓存 / 运行时 ────────────────────────────────────────
+.cache/
+.bun/
+.npm/
+.npm-global/
+.local/
+.config/
+.matplotlib/
+.chromium-browser-snapshots/
+.multi_platform_cache/
+.cups/
+
+# ── 配置 JSON（含密钥/凭据，不应提交）──────────────────
+.claude.json
+.claude.json.backup
+.claude.json.backup_before_buddy
+.claude.json.backup_latest
+.claude.json.backup_pre_dragon
+.mcp.json
+.pcr-stats.json
+protocol_config.conf
+
+# ── .claude 下的缓存/会话/临时数据 ──────────────────────
+.claude/cache/
+.claude/sessions/
+.claude/chrome/
+.claude/plugins/
+.claude/file-history/
+.claude/debug/
+.claude/daemon/
+.claude/jobs/
+.claude/channels/
+.claude/backups/
+.claude/paste-cache/
+.claude/shell-snapshots/
+.claude/projects/
+.claude/tasks/
+.claude/telemetry/
+.claude/stats-cache.json
+.claude/mcp-needs-auth-cache.json
+.claude/daemon-auth-cooldown
+.claude/daemon-auth-status.json
+.claude/daemon.log
+.claude/.last-cleanup
+.claude/history.jsonl
+.claude/settings.json
+.claude/launch.json
+
+# ── 独立子项目（有自己的 git 仓库）─────────────────────
+recruiting-skills/
+bosszhibin-message-resume-handler/
+maimai-recruiter/
+agent-knowledge-lab/
+hireclaw/
+
+# ── 截图 / 临时输出 ──────────────────────────────────────
+*.png
+*.jpeg
+*.jpg
+
+# ── 临时/测试文件 ───────────────────────────────────────
+test-resume-ats.md
+test-resume-ats.pdf
+fs_*.png
+brew_install
+hireseek-backup-*.bundle
+
+# ── 散落的脚本（如需要管理可单独 git add -f）───────────
+feishu_*.py
+find_buddy.js
+generate-resume-pdf.py
+agentProvider*.ts
+boss_zhipin_report_*.md
+plugins/
+feishu-bridge/config.json

@@ -1,5 +1,5 @@
 ---
-name: blacklake-targeted-talent-hunting
+name: targeted-talent-hunting
 description: >
   黑湖定向挖猎技能：围绕目标公司/项目/论文/团队/模糊人才画像，构建高精度候选人地图。
   触发关键词："定向挖猎"、"目标人才地图"、"定向mapping"、"挖猎"、"精准挖人"、
