@@ -21,7 +21,7 @@
 ## 快速开始
 
 ```bash
-git clone https://github.com/kinoxuan0518/ai-council.git
+git clone https://github.com/kinoxuan0518/salary-monogatari.git
 cd ai-council
 npm install        # 若报错加 --legacy-peer-deps
 npm run dev
@@ -36,7 +36,7 @@ npm run dev
 ```
 帮我把这个公开仓库跑起来，它是一个 Next.js 网页游戏（谈薪模拟器）：
 
-1. git clone https://github.com/kinoxuan0518/ai-council.git
+1. git clone https://github.com/kinoxuan0518/salary-monogatari.git
 2. cd ai-council
 3. npm install（如果报错就加 --legacy-peer-deps 再试一次）
 4. npm run dev
