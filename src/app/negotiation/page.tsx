@@ -15,6 +15,7 @@ import {
   stripMarkersFinal,
   stripMarkersStreaming,
   parseMeta,
+  saveGameRecord,
   tempLabel,
 } from '@/lib/negotiation';
 import { parseOpenAIStream } from '@/lib/stream';
@@ -24,6 +25,7 @@ import SetupScreen from '@/components/negotiation/SetupScreen';
 import DialogueBox from '@/components/negotiation/DialogueBox';
 import ResultScreen from '@/components/negotiation/ResultScreen';
 import SettingsModal from '@/components/negotiation/SettingsModal';
+import HistoryPanel from '@/components/negotiation/HistoryPanel';
 
 const DEFAULT_SETUP: PersonaSetup = {
   mode: 'hr',
@@ -59,6 +61,8 @@ export default function NegotiationPage() {
   const [temp, setTemp] = useState(50);
   const [input, setInput] = useState('');
   const [showHistory, setShowHistory] = useState(false);
+  const [showHistoryPanel, setShowHistoryPanel] = useState(false);
+  const [historyRefreshKey, setHistoryRefreshKey] = useState(0);
   const [showEndModal, setShowEndModal] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -73,6 +77,7 @@ export default function NegotiationPage() {
   const recRef = useRef<any>(null);
   const finalVoiceRef = useRef('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const analysisSavedRef = useRef(false);
 
   useEffect(() => {
     roundsRef.current = rounds;
@@ -229,8 +234,9 @@ export default function NegotiationPage() {
       const extra = endCondition
         ? `\n\n【系统检测】对局以「${declared === 'deal' ? '成交' : '破裂'}」结束，条件：${endCondition}`
         : '';
+      let analysis = '';
       try {
-        await streamChat(
+        analysis = await streamChat(
           {
             provider: settings.provider,
             model: settings.model,
@@ -242,9 +248,33 @@ export default function NegotiationPage() {
           (full) => setResultText(full)
         );
       } catch (e) {
-        setResultText(`⚠️ 复盘生成失败：${e instanceof Error ? e.message : e}`);
+        analysis = `⚠️ 复盘生成失败：${e instanceof Error ? e.message : e}`;
+        setResultText(analysis);
       } finally {
         setResultStreaming(false);
+      }
+      // 保存对局历史（同一局只存一次）
+      if (!analysisSavedRef.current) {
+        const transcript = roundsRef.current
+          .filter((r) => !r.hidden && r.role !== 'system')
+          .map((r) => ({ role: r.role as 'player' | 'npc', text: r.text, action: r.meta?.action }));
+        if (transcript.length > 0) {
+          saveGameRecord({
+            id: uid(),
+            date: new Date().toISOString(),
+            mode: setup.mode,
+            npcName: setup.npcName,
+            npcTitle: setup.npcTitle,
+            difficulty: setup.difficulty,
+            outcome: declared,
+            endCondition,
+            roundsCount: transcript.length,
+            transcript,
+            analysis,
+          });
+          analysisSavedRef.current = true;
+          setHistoryRefreshKey((k) => k + 1);
+        }
       }
     },
     [setup, settings, streamChat]
@@ -332,6 +362,7 @@ export default function NegotiationPage() {
       return;
     }
     if (typeof window !== 'undefined' && window.speechSynthesis) window.speechSynthesis.cancel();
+    analysisSavedRef.current = false;
     setRounds([]);
     setTemp(50);
     setExpression('neutral');
@@ -357,9 +388,18 @@ export default function NegotiationPage() {
             {toast}
           </div>
         )}
+        <button
+          onClick={() => setShowHistoryPanel(true)}
+          className="fixed top-4 right-4 z-40 rounded-xl bg-black/40 backdrop-blur border border-white/10 px-4 py-2 text-sm text-gray-200 hover:bg-black/60 transition-all"
+        >
+          📚 历史对局
+        </button>
         <SetupScreen setup={setup} onChange={setSetup} onStart={startGame} />
         {showSettings && (
           <SettingsModal settings={settings} onSave={persistSettings} onClose={() => setShowSettings(false)} />
+        )}
+        {showHistoryPanel && (
+          <HistoryPanel onClose={() => setShowHistoryPanel(false)} refreshKey={historyRefreshKey} />
         )}
       </div>
     );
@@ -367,15 +407,21 @@ export default function NegotiationPage() {
 
   if (stage === 'analysis') {
     return (
-      <ResultScreen
-        text={resultText}
-        streaming={resultStreaming}
-        npcName={setup.npcName}
-        mode={setup.mode}
-        roundsCount={rounds.filter((r) => !r.hidden && r.role !== 'system').length}
-        onRestart={() => setStage('setup')}
-        onBackHome={() => setStage('setup')}
-      />
+      <>
+        <ResultScreen
+          text={resultText}
+          streaming={resultStreaming}
+          npcName={setup.npcName}
+          mode={setup.mode}
+          roundsCount={rounds.filter((r) => !r.hidden && r.role !== 'system').length}
+          onRestart={() => setStage('setup')}
+          onBackHome={() => setStage('setup')}
+          onOpenHistory={() => setShowHistoryPanel(true)}
+        />
+        {showHistoryPanel && (
+          <HistoryPanel onClose={() => setShowHistoryPanel(false)} refreshKey={historyRefreshKey} />
+        )}
+      </>
     );
   }
 

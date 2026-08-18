@@ -417,3 +417,60 @@ export function tempLabel(temp: number): { text: string; color: string } {
   if (temp < 80) return { text: '渐入佳境', color: 'text-lime-300' };
   return { text: '一拍即合', color: 'text-emerald-400' };
 }
+
+// ---------- 对局历史（localStorage 持久化） ----------
+
+export interface GameRecord {
+  id: string;
+  date: string; // ISO 时间
+  mode: GameMode;
+  npcName: string;
+  npcTitle: string;
+  difficulty: Difficulty;
+  outcome: 'deal' | 'break';
+  endCondition?: string; // 成交条件
+  roundsCount: number;
+  transcript: { role: 'player' | 'npc'; text: string; action?: string }[];
+  analysis: string; // 复盘报告 markdown
+}
+
+export const HISTORY_KEY = 'negotiation-game-history';
+const HISTORY_MAX = 50; // 最多保留局数，防止 localStorage 撑爆
+
+export function loadHistory(): GameRecord[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveGameRecord(record: GameRecord): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const list = loadHistory();
+    list.unshift(record);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(list.slice(0, HISTORY_MAX)));
+  } catch {
+    // 容量超限时丢弃最旧的再试一次
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify([record]));
+    } catch { /* 放弃 */ }
+  }
+}
+
+export function deleteGameRecord(id: string): void {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(loadHistory().filter((r) => r.id !== id)));
+  } catch { /* ignore */ }
+}
+
+export function clearHistory(): void {
+  if (typeof window === 'undefined') return;
+  try { localStorage.removeItem(HISTORY_KEY); } catch { /* ignore */ }
+}

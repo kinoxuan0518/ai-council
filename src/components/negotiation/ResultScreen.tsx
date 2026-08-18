@@ -16,7 +16,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
   );
 }
 
-function MarkdownLite({ text }: { text: string }) {
+export function MarkdownLite({ text }: { text: string }) {
   const lines = text.split('\n');
   return (
     <div className="space-y-1">
@@ -64,11 +64,20 @@ interface Props {
   roundsCount: number;
   onRestart: () => void;
   onBackHome: () => void;
+  onOpenHistory?: () => void;
 }
 
-export default function ResultScreen({ text, streaming, npcName, mode, roundsCount, onRestart, onBackHome }: Props) {
+export default function ResultScreen({ text, streaming, npcName, mode, roundsCount, onRestart, onBackHome, onOpenHistory }: Props) {
   return (
     <div className="min-h-screen overflow-y-auto">
+      {onOpenHistory && (
+        <button
+          onClick={onOpenHistory}
+          className="fixed top-4 right-4 z-40 rounded-xl bg-black/40 backdrop-blur border border-white/10 px-4 py-2 text-sm text-gray-200 hover:bg-black/60 transition-all"
+        >
+          📚 历史对局
+        </button>
+      )}
       <div className="max-w-3xl mx-auto px-6 py-10">
         <div className="text-center mb-8 animate-fade-in">
           <div className="text-4xl mb-2">📋</div>
