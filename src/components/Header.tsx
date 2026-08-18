@@ -26,6 +26,12 @@ export default function Header({ session, isRunning }: Props) {
 
       <div className="flex items-center gap-3">
         <Link
+          href="/"
+          className="text-xs px-3 py-1.5 rounded-lg border border-white/10 text-gray-400 hover:text-gray-200 hover:bg-white/[0.06] transition-all"
+        >
+          ← 谈薪物语
+        </Link>
+        <Link
           href="/negotiation"
           className="text-xs px-3 py-1.5 rounded-lg border border-amber-300/30 bg-amber-300/[0.08] text-amber-200 hover:bg-amber-300/[0.16] transition-all"
         >

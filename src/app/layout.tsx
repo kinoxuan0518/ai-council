@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI 决议会',
-  description: '多模型 AI 协同决策平台',
+  title: '谈薪物语 · 薪资谈判模拟',
+  description: '沉浸式谈薪谈判 Gal Game：扮演 HR 或候选人，与大模型自由对话谈判，结束自动生成复盘报告',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
