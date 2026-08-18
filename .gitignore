@@ -155,3 +155,7 @@ agentProvider*.ts
 boss_zhipin_report_*.md
 plugins/
 feishu-bridge/config.json
+
+# 谈薪物语游戏素材例外（Public/ 规则在 macOS 上大小写不敏感会误伤 public/）
+!public/negotiation/
+!public/negotiation/**

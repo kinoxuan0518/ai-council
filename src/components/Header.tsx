@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { CouncilSession } from '@/types';
 
 interface Props {
@@ -24,6 +25,12 @@ export default function Header({ session, isRunning }: Props) {
       </div>
 
       <div className="flex items-center gap-3">
+        <Link
+          href="/negotiation"
+          className="text-xs px-3 py-1.5 rounded-lg border border-amber-300/30 bg-amber-300/[0.08] text-amber-200 hover:bg-amber-300/[0.16] transition-all"
+        >
+          🎴 谈薪模拟器
+        </Link>
         {status && (
           <div className={`flex items-center gap-2 text-sm ${status.color}`}>
             <span className={`w-2 h-2 rounded-full ${status.dot}`} />
