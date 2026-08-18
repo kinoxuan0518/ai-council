@@ -22,7 +22,7 @@
 
 ```bash
 git clone https://github.com/kinoxuan0518/salary-monogatari.git
-cd ai-council
+cd salary-monogatari
 npm install        # 若报错加 --legacy-peer-deps
 npm run dev
 ```
@@ -37,7 +37,7 @@ npm run dev
 帮我把这个公开仓库跑起来，它是一个 Next.js 网页游戏（谈薪模拟器）：
 
 1. git clone https://github.com/kinoxuan0518/salary-monogatari.git
-2. cd ai-council
+2. cd salary-monogatari
 3. npm install（如果报错就加 --legacy-peer-deps 再试一次）
 4. npm run dev
 5. 打开 http://localhost:3000 确认页面能正常渲染
@@ -45,11 +45,12 @@ npm run dev
 跑通后把访问地址告诉我。游戏右上角 ⚙️ 里需要选一家大模型供应商并填 API Key（推荐 DeepSeek），填完即可开始玩。
 ```
 
-## 仓库还包含什么
+## 仓库结构
 
 - `src/app/negotiation/` — 谈薪物语游戏本体
-- `src/app/council/` — AI 决议会（多模型协同决策，次级功能，入口在首页「⚖️ AI 决议会」）
-- `.claude/skills/` — Kino 的个人 Skill 库（招聘 / 飞书 / 产品 Council 等）
+- `src/components/negotiation/` — 游戏组件（立绘、对话框、复盘、历史面板等）
+- `src/lib/` — 游戏逻辑与模型供应商配置
+- `public/negotiation/` — 立绘与背景素材
 
 ## 技术栈
 

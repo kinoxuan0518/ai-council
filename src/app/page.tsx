@@ -30,12 +30,6 @@ export default function Home() {
           >
             开始玩 ▶
           </Link>
-          <Link
-            href="/council"
-            className="px-8 py-4 rounded-2xl font-medium text-gray-300 border border-white/[0.12] bg-white/[0.03] hover:bg-white/[0.07] transition-all"
-          >
-            ⚖️ AI 决议会
-          </Link>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-2 justify-center text-xs text-gray-500">

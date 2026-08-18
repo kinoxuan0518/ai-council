@@ -1,9 +1,0 @@
-{
-  "app_id": "<YOUR_FEISHU_APP_ID>",
-  "app_secret": "<YOUR_FEISHU_APP_SECRET>",
-  "allowed_open_id": "<YOUR_FEISHU_OPEN_ID>",
-  "workdir": "/Users/yourname",
-  "claude_bin": "/path/to/claude",
-  "claude_args": ["--dangerously-skip-permissions"],
-  "timeout_seconds": 600
-}
